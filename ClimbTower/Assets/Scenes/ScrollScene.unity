@@ -193,7 +193,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!4 &160473053
 Transform:
@@ -242,8 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4374db6eeb896a645943e045a965bd18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  forceScroll: 0
+  forceScroll: 1
   scrollSpd: 1
+  maxPosY: 10
 --- !u!114 &1086467937
 MonoBehaviour:
   m_ObjectHideFlags: 0
