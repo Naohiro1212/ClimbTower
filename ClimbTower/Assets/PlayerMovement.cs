@@ -11,8 +11,12 @@ public class PlayerMovement : MonoBehaviour
     private bool jumpRequested;
     private bool isJumped;
 
+    // 外部から動けるかどうかを制御するフラグ
+    public bool canMove;
+
     void Start()
     {
+        canMove = false;
         rb = GetComponent<Rigidbody2D>();
         isJumped = false;
     }
