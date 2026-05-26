@@ -9,10 +9,12 @@ public class PlayerMovement : MonoBehaviour
 
     private float horizontalInput;
     private bool jumpRequested;
+    private bool isJumped;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        isJumped = false;
     }
 
     void Update()
@@ -33,9 +35,10 @@ public class PlayerMovement : MonoBehaviour
             horizontalInput = 1f;
         }
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && !isJumped)
         {
             jumpRequested = true;
+            isJumped = true;
         }
     }
 
@@ -47,6 +50,16 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             jumpRequested = false;
+        }
+    }
+
+    // Groundとの接触を検出して、ジャンプ状態をリセットする
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Groundタグを持つオブジェクトと接触した場合、ジャンプ状態をリセットする
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isJumped = false;
         }
     }
 }
