@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class MoyaControll : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float moyaSpd = 0.5f;
     void Start()
     {
-        
+        Application.targetFrameRate = 60;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(transform.position.y < 10.0f)
+        {
+            transform.Translate(Vector3.up * moyaSpd * Time.deltaTime);
+        }
     }
 }

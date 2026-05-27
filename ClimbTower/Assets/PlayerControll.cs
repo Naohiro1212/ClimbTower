@@ -70,5 +70,9 @@ public class PlayerControll : MonoBehaviour
         {
             SceneManager.LoadScene("GameOverScene");
         }
+        else if(collision.gameObject.CompareTag("Goal"))
+        {
+            SceneManager.LoadScene("ClearScene");
+        }
     }
 }
