@@ -7,15 +7,15 @@ public class GameStartTimer : MonoBehaviour
     private float countDown = 3.0f;
     public TextMeshProUGUI timerText;
 
-    // あとでPlayerMovementとCameraControllerを制御するための参照を追加する予定
-    // public PlayerMovement playerMovement;
+    // あとでPlayerControllerとCameraControllerを制御するための参照を追加する予定
+    public PlayerController playerController;
     // public CameraController cameraController;
 
     private bool started = false;
 
     private void Start()
     {
-        //playerMovement.canMove = false;
+        playerController.canMove = false;
         //cameraController.forceScroll = false;
     }
 
@@ -40,7 +40,7 @@ public class GameStartTimer : MonoBehaviour
     {
         started = true;
 
-        //playerMovement.canMove = true;
+        playerController.canMove = true;
         //scrollController.forceScroll = true;
 
         // 少し後に文字を消す
@@ -50,5 +50,10 @@ public class GameStartTimer : MonoBehaviour
     private void HideText()
     {
         timerText.text = "";
+    }
+
+    public bool IsStarted()
+    {
+        return started;
     }
 }
