@@ -740,6 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoyaControll
   moyaSpd: 0.8
+  posMaxY: 20
 --- !u!1 &961092181
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,7 +753,7 @@ GameObject:
   - component: {fileID: 961092183}
   - component: {fileID: 961092182}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Goal
   m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -939,7 +940,7 @@ GameObject:
   - component: {fileID: 1667802637}
   - component: {fileID: 1667802641}
   m_Layer: 0
-  m_Name: TestPlayer
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

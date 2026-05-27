@@ -72,7 +72,7 @@ public class PlayerControll : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("Goal"))
         {
-            SceneManager.LoadScene("ClearScene");
+            SceneManager.LoadScene("PlayScene2");
         }
     }
 }
