@@ -12,14 +12,13 @@ public class PlayerController : MonoBehaviour
     [Header("Jump")]
     public float jumpForce = 8f;
 
+    [SerializeField] GameNormalTimer timer;
+
     private float horizontalInput;
     private bool jumpRequested;
     public bool canMove;
 
     public bool isGrounded;
-    private bool isJumped;
-
-    private float savedAirSpeed;
 
     void Start()
     {
@@ -29,9 +28,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (!canMove) return;
+        
 
         horizontalInput = 0f;
 
+        // 移動入力の処理
         if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
         {
             horizontalInput = -1f;
@@ -40,10 +41,15 @@ public class PlayerController : MonoBehaviour
         {
             horizontalInput = 1f;
         }
-
         if ((Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame) && isGrounded)
         {
             jumpRequested = true;
+        }
+
+        // タイマーがストップとしている場合、プレイヤーの動きを停止する   
+        if (timer.IsStop())
+        {
+            canMove = false;
         }
     }
 
@@ -57,8 +63,6 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded)
         {
-            isJumped = false;
-
             float targetX = horizontalInput * moveSpeed;
             rb.linearVelocity = new Vector2(targetX, rb.linearVelocity.y);
         }
@@ -73,10 +77,7 @@ public class PlayerController : MonoBehaviour
 
         if (jumpRequested)
         {
-            savedAirSpeed = rb.linearVelocity.x;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-
-            isJumped = true;
             jumpRequested = false;
         }
     }

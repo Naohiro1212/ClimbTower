@@ -10,6 +10,7 @@ public class GameStartTimer : MonoBehaviour
     // あとでPlayerControllerとCameraControllerを制御するための参照を追加する予定
     public PlayerController playerController;
     // public CameraController cameraController;
+    public GameNormalTimer gameNormalTimer;
 
     private bool started = false;
 
@@ -17,11 +18,13 @@ public class GameStartTimer : MonoBehaviour
     {
         playerController.canMove = false;
         //cameraController.forceScroll = false;
+        gameNormalTimer = FindAnyObjectByType<GameNormalTimer>();
     }
 
     private void Update()
     {
         if (started) return;
+        if (gameNormalTimer.IsStop() == true) return;
 
         countDown -= Time.deltaTime;
 
