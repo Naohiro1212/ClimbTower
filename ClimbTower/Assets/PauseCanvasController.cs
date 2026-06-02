@@ -3,25 +3,31 @@ using UnityEngine.InputSystem;
 
 public class PauseCanvasController : MonoBehaviour
 {
-    [SerializeField] private Canvas canvas;
+    [SerializeField] private Canvas pauseCanvas;
+    [SerializeField] private Canvas clearCanvas;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (canvas == null)
+        if (pauseCanvas == null)
         {
             Debug.Log("キャンバスが設定されていません");
         }
 
-        canvas.enabled = false;
+        if (clearCanvas == null)
+        {
+            Debug.Log("クリアキャンバスが設定されていません。");
+        }
+
+        pauseCanvas.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.escapeKey.wasPressedThisFrame)
+        if(Keyboard.current.escapeKey.wasPressedThisFrame && !clearCanvas.enabled)
         {
-            canvas.enabled = !canvas.enabled;
+            pauseCanvas.enabled = !pauseCanvas.enabled;
         }
     }
 }

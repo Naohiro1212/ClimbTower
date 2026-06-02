@@ -2853,7 +2853,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec723e2205dcb2f4ab64c4923b540198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseCanvasController
-  canvas: {fileID: 2128132308}
+  pauseCanvas: {fileID: 2128132308}
+  clearCanvas: {fileID: 242460464}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
