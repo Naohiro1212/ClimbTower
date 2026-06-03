@@ -58,7 +58,7 @@ public class PlayerControll2 : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Stage"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isJumped = false;
         }
