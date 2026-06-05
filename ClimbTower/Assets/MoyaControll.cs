@@ -4,8 +4,14 @@ public class MoyaControll : MonoBehaviour
 {
     public float moyaSpd = 0.5f;
     public float posMaxY = 20.0f;
+    [SerializeField] private GameNormalTimer gameNormalTimer;
+
     void Start()
     {
+        if (gameNormalTimer != null)
+        {
+            Debug.Log("ノーマルタイムが入っていません");
+        }
         Application.targetFrameRate = 60;
     }
 

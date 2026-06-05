@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
+  - Moya
+  - Goal
+  - Stage
   layers:
   - Default
   - TransparentFX

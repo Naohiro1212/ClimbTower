@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StagePrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 8283544642144421325, guid: f1a3979e934da844b9550832a9b0ce0f, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -874,7 +878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   forceScroll: 1
-  scrollSpd: 0.5
+  scrollSpd: 0.8
   maxPosY: 10
 --- !u!1001 &523037490
 PrefabInstance:
@@ -1222,7 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21b7cd9d24015c41bea161436a095ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameNormalTimer
-  limit: 3
+  limit: 15
   normalTimerText: {fileID: 1975417708}
 --- !u!4 &876353275
 Transform:
@@ -1326,8 +1330,8 @@ Transform:
   m_GameObject: {fileID: 936187075}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
-  m_LocalScale: {x: 30, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -12.7612, z: 0}
+  m_LocalScale: {x: 30, y: 10.936899, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1392,6 +1396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MoyaControll
   moyaSpd: 0.8
   posMaxY: 20
+  gameNormalTimer: {fileID: 876353274}
 --- !u!1 &961092181
 GameObject:
   m_ObjectHideFlags: 0
@@ -3079,7 +3084,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2057428724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3095,7 +3100,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   moveSpeed: 7.5
   airControlMultiplier: 0.8
-  jumpForce: 5
+  jumpForce: 10.2
   timer: {fileID: 876353274}
   canMove: 0
   isGrounded: 0
