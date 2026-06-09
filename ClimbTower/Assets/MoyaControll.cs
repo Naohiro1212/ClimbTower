@@ -17,7 +17,7 @@ public class MoyaControll : MonoBehaviour
 
     void Update()
     {
-        if(transform.position.y < posMaxY)
+        if(transform.position.y < posMaxY && gameNormalTimer.IsStop() == false)
         {
             transform.Translate(Vector3.up * moyaSpd * Time.deltaTime);
         }
