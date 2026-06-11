@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 2320289}
   - component: {fileID: 2320288}
   - component: {fileID: 2320287}
-  - component: {fileID: 2320291}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -277,20 +276,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2320291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2320285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1cda692a0cd5f94db5c067ca715de3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerControll2
-  moveSpeed: 10
-  jumpForce: 8
 --- !u!1 &45658349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,6 +1819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MoyaControll
   moyaSpd: 0.5
   posMaxY: 25
+  gameNormalTimer: {fileID: 0}
 --- !u!1 &2033641506
 GameObject:
   m_ObjectHideFlags: 0
