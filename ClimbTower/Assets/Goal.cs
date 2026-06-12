@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    private bool isClear = false;
+    [SerializeField]private bool isClear = false;
     public bool IsClear()
     {
         return isClear;

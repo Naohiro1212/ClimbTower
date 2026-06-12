@@ -8,7 +8,8 @@ public class GameNormalTimer : MonoBehaviour
     private float timer = 0.0f;
     [SerializeField] private float limit = 60.0f;
     public TextMeshProUGUI normalTimerText;
-    GameStartTimer gameStartTimer;
+    private GameStartTimer gameStartTimer;
+    private Goal goal;
 
     // タイマーが停止しているかどうかを示すフラグ（例: タイムアップ後など）
     private bool isStop;
@@ -23,6 +24,11 @@ public class GameNormalTimer : MonoBehaviour
         if (gameStartTimer == null)
         {
             Debug.Log("ゲーム開始タイマーが見つかりません");
+        }
+        goal = FindAnyObjectByType<Goal>();
+        if (goal == null)
+        {
+            Debug.Log("ゴールが見つかりません");
         }
     }
 
@@ -53,6 +59,11 @@ public class GameNormalTimer : MonoBehaviour
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             isStop = !isStop;
+        }
+
+        if (goal.IsClear())
+        {
+            isStop = true;
         }
     }
 
