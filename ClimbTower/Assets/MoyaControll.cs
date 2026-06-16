@@ -8,7 +8,7 @@ public class MoyaControll : MonoBehaviour
 
     void Start()
     {
-        if (gameNormalTimer != null)
+        if (gameNormalTimer == null)
         {
             Debug.Log("ノーマルタイムが入っていません");
         }

@@ -3,23 +3,32 @@ using TMPro;
 
 public class GameDirector : MonoBehaviour
 {
-    GameObject timerText;
-    MoyaControll moyaScript;
-    CameraController cameraScript;
+    [SerializeField] private MoyaControll moyaScript;
+    [SerializeField] private CameraController cameraScript;
     float time = 0.0f;
+
+    /// <summary>
+    /// 各段階のスピードと、何秒経った後にスピードを上げるか
+    /// </summary>
+    private const int speedStepsNum = 4;
+    private const int speedUpTimingsNum = 3;
+
+    [SerializeField] private float[] speedSteps = new float[speedStepsNum];
+    [SerializeField] private float[] speedUpTiming = new float[speedUpTimingsNum];
+
 
     void Start()
     {
-        this.timerText = GameObject.Find("Timer");
-        GameObject moya = GameObject.Find("Moya");
-        GameObject camera = GameObject.Find("Main Camera");
-        if(moya != null)
+        // モヤスクリプトが見つからなければデバグ出力
+        if (moyaScript == null)
         {
-            this.moyaScript = moya.GetComponent<MoyaControll>();
+            Debug.Log("モヤが指定されていません");
         }
-        if(camera != null)
+
+        // カメラスクリプトが見つからなければデバグ出力
+        if (cameraScript == null)
         {
-            this.cameraScript = camera.GetComponent<CameraController>();
+            Debug.Log("カメラが指定されていません");
         }
     }
 
@@ -44,7 +53,5 @@ public class GameDirector : MonoBehaviour
         {
             this.moyaScript.moyaSpd = 0.8f;
         }
-
-        this.timerText.GetComponent<TextMeshProUGUI>().text = this.time.ToString("F1");
     }
 }
