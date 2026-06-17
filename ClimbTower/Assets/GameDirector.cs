@@ -36,22 +36,25 @@ public class GameDirector : MonoBehaviour
     {
         this.time += Time.deltaTime;
 
-        if (this.time >= 15.0f)
+        if (this.time >= speedUpTiming[2])
         {
-            this.moyaScript.moyaSpd = 1.5f;
-            this.cameraScript.scrollSpd = 1.5f;
+            this.moyaScript.moyaSpd = speedSteps[3];
+            this.cameraScript.scrollSpd = speedSteps[3];
         }
-        else if (this.time >= 10.0f)
+        else if (this.time >= speedUpTiming[1])
         {
-            this.moyaScript.moyaSpd = 1.2f;
+            this.moyaScript.moyaSpd = speedSteps[2];
+            this.cameraScript.scrollSpd = speedSteps[2];
         }
-        else if(this.time >= 5.0f)
+        else if(this.time >= speedUpTiming[0])
         {
-            this.moyaScript.moyaSpd = 1.0f;
+            this.moyaScript.moyaSpd = speedSteps[1];
+            this.cameraScript.scrollSpd = speedSteps[1];
         }
         else
         {
-            this.moyaScript.moyaSpd = 0.8f;
+            this.moyaScript.moyaSpd = speedSteps[0];
+            this.cameraScript.scrollSpd = speedSteps[0];
         }
     }
 }
