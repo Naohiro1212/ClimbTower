@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class BackTitle : MonoBehaviour
 {
-    public void SwitchScene()
+    public void switchScene()
     {
         SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
     }

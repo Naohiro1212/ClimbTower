@@ -28,9 +28,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioSource bgmSource;
 
-    [Header("Timer")]
-    [SerializeField] GameNormalTimer timer;
-
     private float horizontalInput;
     private bool jumpRequested;
 
@@ -42,7 +39,7 @@ public class PlayerController : MonoBehaviour
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
-        rb = GetComponent<Rigidbody2D>();
+        }
 
         if (audioSource == null)
         {
