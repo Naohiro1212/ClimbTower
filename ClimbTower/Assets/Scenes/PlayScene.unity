@@ -1290,7 +1290,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 314132468}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1195080998253649316, guid: f1a3979e934da844b9550832a9b0ce0f, type: 3}
       propertyPath: m_Size.x
@@ -1310,11 +1310,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3006821882650819543, guid: f1a3979e934da844b9550832a9b0ce0f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.53
+      value: -0.28999996
       objectReference: {fileID: 0}
     - target: {fileID: 3006821882650819543, guid: f1a3979e934da844b9550832a9b0ce0f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 105.2441
+      value: 96.94
       objectReference: {fileID: 0}
     - target: {fileID: 3006821882650819543, guid: f1a3979e934da844b9550832a9b0ce0f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1362,18 +1362,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8283544642144421325, guid: f1a3979e934da844b9550832a9b0ce0f, type: 3}
       propertyPath: m_Name
-      value: StagePrefab (59)
+      value: Ceiling
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1a3979e934da844b9550832a9b0ce0f, type: 3}
---- !u!4 &234047347 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3006821882650819543, guid: f1a3979e934da844b9550832a9b0ce0f, type: 3}
-  m_PrefabInstance: {fileID: 234047346}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &252301531 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8283544642144421325, guid: f1a3979e934da844b9550832a9b0ce0f, type: 3}
@@ -1559,7 +1554,6 @@ Transform:
   - {fileID: 1161357969}
   - {fileID: 69143362}
   - {fileID: 276672888}
-  - {fileID: 234047347}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &327331408
@@ -2698,7 +2692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   forceScroll: 1
-  scrollSpd: 0.95
+  scrollSpd: 1
   maxPosY: 90
   gameNormalTimer: {fileID: 876353274}
 --- !u!1001 &523037490
@@ -4025,7 +4019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efaec3c835eecb146a06bd6f26032b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoyaControll
-  moyaSpd: 0.95
+  moyaSpd: 1
   posMaxY: 80
   gameNormalTimer: {fileID: 876353274}
 --- !u!1 &995464460
@@ -7924,7 +7918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8283544642144421325, guid: f1a3979e934da844b9550832a9b0ce0f, type: 3}
       propertyPath: m_Name
-      value: Earth
+      value: Grass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9396,17 +9390,18 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 1115336292}
   - {fileID: 1590595322}
-  - {fileID: 1862902775}
+  - {fileID: 1115336292}
+  - {fileID: 1461429123}
   - {fileID: 349865454}
   - {fileID: 432515210}
+  - {fileID: 1862902775}
+  - {fileID: 234047346}
   - {fileID: 314132468}
+  - {fileID: 2057428726}
+  - {fileID: 936187078}
+  - {fileID: 1222930088}
   - {fileID: 607722122}
   - {fileID: 1894142399}
   - {fileID: 1829467418}
   - {fileID: 173776570}
-  - {fileID: 2057428726}
-  - {fileID: 936187078}
-  - {fileID: 1222930088}
-  - {fileID: 1461429123}
