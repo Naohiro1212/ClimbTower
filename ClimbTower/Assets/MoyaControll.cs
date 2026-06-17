@@ -8,7 +8,7 @@ public class MoyaControll : MonoBehaviour
 
     void Start()
     {
-        if (gameNormalTimer != null)
+        if (gameNormalTimer == null)
         {
             Debug.Log("ノーマルタイムが入っていません");
         }
@@ -17,7 +17,7 @@ public class MoyaControll : MonoBehaviour
 
     void Update()
     {
-        if(transform.position.y < posMaxY)
+        if(transform.position.y < posMaxY && gameNormalTimer.IsStop() == false)
         {
             transform.Translate(Vector3.up * moyaSpd * Time.deltaTime);
         }

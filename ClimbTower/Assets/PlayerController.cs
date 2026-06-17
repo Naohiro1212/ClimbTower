@@ -5,15 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    [Header("References")]
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private GameNormalTimer timer;
 
     [Header("Move")]
-    public float moveSpeed = 5f;
-    public float airControlMultiplier = 0.3f;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float airControlMultiplier = 0.3f;
 
     [Header("Jump")]
-    public float jumpForce = 8f;
+    [SerializeField] private float jumpForce = 8f;
 
+    [Header("Ground Check")]
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckDistance = 0.15f;
+    [SerializeField] private LayerMask groundLayer;
     [Header("Audio Settings")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip jumpSound;
@@ -27,12 +33,15 @@ public class PlayerController : MonoBehaviour
 
     private float horizontalInput;
     private bool jumpRequested;
-    public bool canMove;
 
+    public bool canMove = true;
     public bool isGrounded;
 
-    void Start()
+    private void Awake()
     {
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
 
         if (audioSource == null)
@@ -41,14 +50,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
-        if (!canMove) return;
-        
+        if (!canMove)
+        {
+            horizontalInput = 0f;
+            jumpRequested = false;
+            return;
+        }
 
         horizontalInput = 0f;
 
-        // 移動入力の処理
         if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
         {
             horizontalInput = -1f;
@@ -57,7 +69,10 @@ public class PlayerController : MonoBehaviour
         {
             horizontalInput = 1f;
         }
-        if ((Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame) && isGrounded)
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame ||
+            Keyboard.current.wKey.wasPressedThisFrame ||
+            Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
             jumpRequested = true;
 
@@ -67,56 +82,62 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // タイマーがストップとしている場合、プレイヤーの動きを停止する   
-        if (timer.IsStop())
+        if (timer != null && timer.IsStop())
         {
             canMove = false;
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
+        CheckGrounded();
+
         if (!canMove)
         {
             rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
             return;
         }
 
+        float targetX;
+
         if (isGrounded)
         {
-            float targetX = horizontalInput * moveSpeed;
-            rb.linearVelocity = new Vector2(targetX, rb.linearVelocity.y);
+            targetX = horizontalInput * moveSpeed;
         }
         else
         {
             float airAcceleration = moveSpeed * airControlMultiplier;
-            float targetX = rb.linearVelocity.x + horizontalInput * airAcceleration * Time.fixedDeltaTime;
+            targetX = rb.linearVelocity.x + horizontalInput * airAcceleration * Time.fixedDeltaTime;
             targetX = Mathf.Clamp(targetX, -moveSpeed, moveSpeed);
-
-            rb.linearVelocity = new Vector2(targetX, rb.linearVelocity.y);
         }
 
-        if (jumpRequested)
+        rb.linearVelocity = new Vector2(targetX, rb.linearVelocity.y);
+
+        if (jumpRequested && isGrounded)
         {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            jumpRequested = false;
         }
+
+        jumpRequested = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void CheckGrounded()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (groundCheck == null)
         {
             isGrounded = false;
+            return;
         }
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            groundCheck.position,
+            Vector2.down,
+            groundCheckDistance,
+            groundLayer
+        );
+
+        isGrounded = hit.collider != null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

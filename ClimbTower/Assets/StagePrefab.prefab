@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3006821882650819543}
   - component: {fileID: 1195080998253649316}
   - component: {fileID: 8105936793653789706}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StagePrefab
   m_TagString: Ground
   m_Icon: {fileID: 0}
