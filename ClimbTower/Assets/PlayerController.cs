@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +20,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckDistance = 0.15f;
     [SerializeField] private LayerMask groundLayer;
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip goalSound;
+    [SerializeField] private AudioClip moyaSound;
+
+    [SerializeField] private AudioSource bgmSource;
+
+    [Header("Timer")]
+    [SerializeField] GameNormalTimer timer;
 
     private float horizontalInput;
     private bool jumpRequested;
@@ -30,6 +42,11 @@ public class PlayerController : MonoBehaviour
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
         }
     }
 
@@ -58,6 +75,11 @@ public class PlayerController : MonoBehaviour
             Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
             jumpRequested = true;
+
+            if(audioSource != null && jumpSound != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
         }
 
         if (timer != null && timer.IsStop())
@@ -116,5 +138,50 @@ public class PlayerController : MonoBehaviour
         );
 
         isGrounded = hit.collider != null;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(!canMove)
+        {
+            return;
+        }
+
+        if (collision.gameObject.CompareTag("Moya"))
+        {
+            canMove = false;
+            StartCoroutine(PlaySoundAndLoadScene(moyaSound, "GameOverScene"));
+        }
+        else if (collision.gameObject.CompareTag("Goal"))
+        {
+            canMove = false;
+            StartCoroutine(PlaySoundAndLoadScene(goalSound, "ClearScene"));
+        }
+    }
+
+    private IEnumerator PlaySoundAndLoadScene(AudioClip clip, string sceneName)
+    {
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
+
+        if (bgmSource != null)
+        {
+            bgmSource.Stop();
+        }
+
+        float waitTime = 0;
+
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+            waitTime = clip.length;
+        }
+
+        yield return new WaitForSeconds(waitTime);
+
+        SceneManager.LoadScene(sceneName);
     }
 }

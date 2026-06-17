@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 182442456}
   - component: {fileID: 182442455}
   m_Layer: 5
-  m_Name: Retry
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Retry
+  m_Text: Title
 --- !u!222 &182442456
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 432028766}
   - component: {fileID: 432028769}
   m_Layer: 5
-  m_Name: RetryButton
+  m_Name: TitleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -398,6 +398,10 @@ GameObject:
   - component: {fileID: 151258713}
   - component: {fileID: 151258712}
   - component: {fileID: 151258711}
+  - component: {fileID: 2320290}
+  - component: {fileID: 2320289}
+  - component: {fileID: 2320288}
+  - component: {fileID: 2320287}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -660,6 +664,17 @@ MonoBehaviour:
   m_PresetInfoIsWorld: 0
 --- !u!223 &167906156
 Canvas:
+  m_GameObject: {fileID: 2320285}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &45658349
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9329,6 +9344,22 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2067633308
+--- !u!114 &1995257609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995257605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efaec3c835eecb146a06bd6f26032b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoyaControll
+  moyaSpd: 0.5
+  posMaxY: 25
+  gameNormalTimer: {fileID: 0}
+--- !u!1 &2033641506
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
