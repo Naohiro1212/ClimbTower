@@ -9103,7 +9103,7 @@ GameObject:
   - component: {fileID: 1901540784}
   - component: {fileID: 1901540783}
   m_Layer: 0
-  m_Name: TimerSliderController
+  m_Name: SliderController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9121,7 +9121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d18baeeb1ab51d428dbbcdac17dd712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimerSliderController
-  timerSlider: {fileID: 1444778352}
+  slider: {fileID: 1444778352}
 --- !u!4 &1901540784
 Transform:
   m_ObjectHideFlags: 0
@@ -9131,11 +9131,11 @@ Transform:
   m_GameObject: {fileID: 1901540782}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 448.5305, y: 216.17862, z: 0}
+  m_LocalPosition: {x: 444.07278, y: 208.6856, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2118430479}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1943381512 stripped
 Transform:
@@ -10082,7 +10082,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1901540784}
   - {fileID: 1120777272}
   - {fileID: 302728064}
   m_Father: {fileID: 0}
@@ -10109,6 +10108,7 @@ SceneRoots:
   - {fileID: 1438859659}
   - {fileID: 1862155713}
   - {fileID: 815872189}
+  - {fileID: 1901540784}
   - {fileID: 797679553}
   - {fileID: 892851130}
   - {fileID: 239242346}
