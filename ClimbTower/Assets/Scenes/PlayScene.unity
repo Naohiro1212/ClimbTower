@@ -1279,7 +1279,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1112732370}
   - {fileID: 1844141312}
   - {fileID: 876353275}
   m_Father: {fileID: 0}
@@ -4020,7 +4019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoyaControll
   moyaSpd: 1
-  posMaxY: 80
+  posMaxY: 90
   gameNormalTimer: {fileID: 876353274}
 --- !u!1 &995464460
 GameObject:
@@ -4383,7 +4382,7 @@ GameObject:
   - component: {fileID: 1112732370}
   - component: {fileID: 1112732369}
   m_Layer: 0
-  m_Name: TimerSliderController
+  m_Name: SliderController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4401,7 +4400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d18baeeb1ab51d428dbbcdac17dd712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimerSliderController
-  timerSlider: {fileID: 1603465146}
+  slider: {fileID: 1603465146}
 --- !u!4 &1112732370
 Transform:
   m_ObjectHideFlags: 0
@@ -4411,11 +4410,11 @@ Transform:
   m_GameObject: {fileID: 1112732368}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.772858, y: -12.590271, z: 0}
+  m_LocalPosition: {x: 444.07278, y: 208.6856, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 173776570}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1115336289
 GameObject:
@@ -9401,6 +9400,7 @@ SceneRoots:
   - {fileID: 2057428726}
   - {fileID: 936187078}
   - {fileID: 1222930088}
+  - {fileID: 1112732370}
   - {fileID: 607722122}
   - {fileID: 1894142399}
   - {fileID: 1829467418}
