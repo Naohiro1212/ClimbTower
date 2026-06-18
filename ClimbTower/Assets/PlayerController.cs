@@ -7,11 +7,20 @@ public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Collider2D playerCollider;
     [SerializeField] private GameNormalTimer timer;
 
     [Header("Move")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float airControlMultiplier = 0.3f;
+
+    [Header("Normal Ground Move")]
+    [SerializeField] private float groundAcceleration = 30f;
+    [SerializeField] private float groundDeceleration = 40f;
+
+    [Header("Ice Move")]
+    [SerializeField] private float iceAcceleration = 3f;
+    [SerializeField] private float iceDeceleration = 2.2f;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 8f;
@@ -20,6 +29,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckDistance = 0.15f;
     [SerializeField] private LayerMask groundLayer;
+
+    [Header("Physics Materials")]
+    [SerializeField] private PhysicsMaterial2D iceMaterial;
+    [SerializeField] private PhysicsMaterial2D playerMaterial;
+
     [Header("Audio Settings")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip jumpSound;
@@ -34,11 +48,18 @@ public class PlayerController : MonoBehaviour
     public bool canMove = true;
     public bool isGrounded;
 
+    private Collider2D currentGroundCollider;
+
     private void Awake()
     {
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
+        }
+
+        if (playerCollider == null)
+        {
+            playerCollider = GetComponent<Collider2D>();
         }
 
         if (audioSource == null)
@@ -72,11 +93,6 @@ public class PlayerController : MonoBehaviour
             Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
             jumpRequested = true;
-
-            if(audioSource != null && jumpSound != null)
-            {
-                audioSource.PlayOneShot(jumpSound);
-            }
         }
 
         if (timer != null && timer.IsStop())
@@ -95,28 +111,77 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        float targetX;
-
-        if (isGrounded)
+        if (isGrounded && IsOnIce())
         {
-            targetX = horizontalInput * moveSpeed;
+            MoveOnIce();
+        }
+        else if (isGrounded)
+        {
+            MoveOnNormalGround();
         }
         else
         {
-            float airAcceleration = moveSpeed * airControlMultiplier;
-            targetX = rb.linearVelocity.x + horizontalInput * airAcceleration * Time.fixedDeltaTime;
-            targetX = Mathf.Clamp(targetX, -moveSpeed, moveSpeed);
+            MoveInAir();
         }
-
-        rb.linearVelocity = new Vector2(targetX, rb.linearVelocity.y);
 
         if (jumpRequested && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+            if (audioSource != null && jumpSound != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
         }
 
         jumpRequested = false;
+    }
+
+    private void MoveOnNormalGround()
+    {
+        float targetX = horizontalInput * moveSpeed;
+        float currentX = rb.linearVelocity.x;
+
+        float accelRate = Mathf.Abs(horizontalInput) > 0.01f ? groundAcceleration : groundDeceleration;
+        float newX = Mathf.MoveTowards(currentX, targetX, accelRate * Time.fixedDeltaTime);
+
+        rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
+
+        if (playerCollider != null && playerMaterial != null)
+        {
+            playerCollider.sharedMaterial = playerMaterial;
+        }
+    }
+
+    private void MoveOnIce()
+    {
+        float targetX = horizontalInput * moveSpeed;
+        float currentX = rb.linearVelocity.x;
+
+        float accelRate = Mathf.Abs(horizontalInput) > 0.01f ? iceAcceleration : iceDeceleration;
+        float newX = Mathf.MoveTowards(currentX, targetX, accelRate * Time.fixedDeltaTime);
+
+        rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
+
+        if (playerCollider != null && iceMaterial != null)
+        {
+            playerCollider.sharedMaterial = iceMaterial;
+        }
+    }
+
+    private void MoveInAir()
+    {
+        float airAcceleration = moveSpeed * airControlMultiplier;
+        float targetX = rb.linearVelocity.x + horizontalInput * airAcceleration * Time.fixedDeltaTime;
+        targetX = Mathf.Clamp(targetX, -moveSpeed, moveSpeed);
+
+        rb.linearVelocity = new Vector2(targetX, rb.linearVelocity.y);
+
+        if (playerCollider != null && playerMaterial != null)
+        {
+            playerCollider.sharedMaterial = playerMaterial;
+        }
     }
 
     private void CheckGrounded()
@@ -124,6 +189,7 @@ public class PlayerController : MonoBehaviour
         if (groundCheck == null)
         {
             isGrounded = false;
+            currentGroundCollider = null;
             return;
         }
 
@@ -135,11 +201,22 @@ public class PlayerController : MonoBehaviour
         );
 
         isGrounded = hit.collider != null;
+        currentGroundCollider = hit.collider;
+    }
+
+    private bool IsOnIce()
+    {
+        if (currentGroundCollider == null)
+        {
+            return false;
+        }
+
+        return currentGroundCollider.CompareTag("Ice");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!canMove)
+        if (!canMove)
         {
             return;
         }
@@ -169,7 +246,7 @@ public class PlayerController : MonoBehaviour
             bgmSource.Stop();
         }
 
-        float waitTime = 0;
+        float waitTime = 0f;
 
         if (audioSource != null && clip != null)
         {
