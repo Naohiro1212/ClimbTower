@@ -1,3 +1,4 @@
+<img width="809" height="512" alt="プレイヤー" src="https://github.com/user-attachments/assets/d36fa604-6235-4a49-8ce4-c50f0e7d3366" />
 <img width="161" height="255" alt="敵1" src="https://github.com/user-attachments/assets/08cdd266-1a30-446f-9e55-2b1167e92ced" />
 <img width="510" height="255" alt="敵" src="https://github.com/user-attachments/assets/2c274c9d-b0ee-4818-8aa0-d0e49ab53193" />
 <img width="225" height="225" alt="宝箱" src="https://github.com/user-attachments/assets/f70f2dd4-80db-4038-8dda-75e094b8369d" />
