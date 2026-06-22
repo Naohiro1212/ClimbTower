@@ -3,31 +3,47 @@ using UnityEngine.InputSystem;
 
 public class PauseCanvasController : MonoBehaviour
 {
-    [SerializeField] private Canvas pauseCanvas;
-    [SerializeField] private Canvas clearCanvas;
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject clearPanel;
+    [SerializeField] private GameStartTimer gameStartTimer;
+    [SerializeField] private GameNormalTimer gameNormalTimer;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        if (pauseCanvas == null)
+        if (pausePanel == null)
         {
-            Debug.Log("キャンバスが設定されていません");
+            Debug.LogError("PausePanel が設定されていません");
+            return;
         }
 
-        if (clearCanvas == null)
+        if (clearPanel == null)
         {
-            Debug.Log("クリアキャンバスが設定されていません。");
+            Debug.LogError("ClearPanel が設定されていません");
         }
-
-        pauseCanvas.enabled = false;
+        pausePanel.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(Keyboard.current.escapeKey.wasPressedThisFrame && !clearCanvas.enabled)
+        if (Keyboard.current == null)
         {
-            pauseCanvas.enabled = !pauseCanvas.enabled;
+            return;
+        }
+
+        if (gameStartTimer.IsStarted() == false)
+        {
+            return;
+        }
+
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            bool isPauseOpen = !pausePanel.activeSelf;
+            pausePanel.SetActive(isPauseOpen);
+
+            if (gameNormalTimer != null)
+            {
+                gameNormalTimer.SetStop(isPauseOpen);
+            }
         }
     }
 }

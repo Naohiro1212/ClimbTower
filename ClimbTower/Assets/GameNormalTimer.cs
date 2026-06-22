@@ -56,11 +56,6 @@ public class GameNormalTimer : MonoBehaviour
             isStop = true;
         }
 
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            isStop = !isStop;
-        }
-
         if (goal.IsClear())
         {
             isStop = true;

@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private GameNormalTimer timer;
+    [SerializeField] private GameStartTimer gameStartTimer;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer sr;
 
     [Header("Move")]
     [SerializeField] private float moveSpeed = 5f;
@@ -19,8 +22,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundDeceleration = 40f;
 
     [Header("Ice Move")]
-    [SerializeField] private float iceAcceleration = 3f;
-    [SerializeField] private float iceDeceleration = 2.2f;
+    [SerializeField] private float iceAcceleration = 30f;
+    [SerializeField] private float iceDeceleration = 30.0f;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 8f;
@@ -66,11 +69,25 @@ public class PlayerController : MonoBehaviour
         {
             audioSource = GetComponent<AudioSource>();
         }
+
+        if (timer == null)
+        {
+            timer = FindAnyObjectByType<GameNormalTimer>();
+        }
+
+        if (gameStartTimer == null)
+        {
+            gameStartTimer = FindAnyObjectByType<GameStartTimer>();
+        }
     }
 
     private void Update()
     {
-        if (!canMove)
+        bool started = gameStartTimer == null || gameStartTimer.IsStarted();
+        bool pausedOrStopped = timer != null && timer.IsStop();
+        bool canControl = canMove && started && !pausedOrStopped;
+
+        if (!canControl)
         {
             horizontalInput = 0f;
             jumpRequested = false;
@@ -88,16 +105,18 @@ public class PlayerController : MonoBehaviour
             horizontalInput = 1f;
         }
 
+        if (horizontalInput > 0.01f) sr.flipX = true;
+        else if (horizontalInput < -0.01f) sr.flipX = false;
+
+        float speed = Mathf.Abs(rb.linearVelocity.x);
+        if (speed < 0.03f) speed = 0f;
+        animator.SetFloat("Speed", speed);
+
         if (Keyboard.current.spaceKey.wasPressedThisFrame ||
             Keyboard.current.wKey.wasPressedThisFrame ||
             Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
             jumpRequested = true;
-        }
-
-        if (timer != null && timer.IsStop())
-        {
-            canMove = false;
         }
     }
 
@@ -105,7 +124,11 @@ public class PlayerController : MonoBehaviour
     {
         CheckGrounded();
 
-        if (!canMove)
+        bool started = gameStartTimer == null || gameStartTimer.IsStarted();
+        bool pausedOrStopped = timer != null && timer.IsStop();
+        bool canControl = canMove && started && !pausedOrStopped;
+
+        if (!canControl)
         {
             rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
             return;
@@ -159,14 +182,16 @@ public class PlayerController : MonoBehaviour
         float targetX = horizontalInput * moveSpeed;
         float currentX = rb.linearVelocity.x;
 
-        float accelRate = Mathf.Abs(horizontalInput) > 0.01f ? iceAcceleration : iceDeceleration;
-        float newX = Mathf.MoveTowards(currentX, targetX, accelRate * Time.fixedDeltaTime);
+        float accelRate = Mathf.Abs(horizontalInput) > 0.01f
+            ? groundAcceleration
+            : iceDeceleration;
 
+        float newX = Mathf.MoveTowards(currentX, targetX, accelRate * Time.fixedDeltaTime);
         rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
 
-        if (playerCollider != null && iceMaterial != null)
+        if (playerCollider != null && playerMaterial != null)
         {
-            playerCollider.sharedMaterial = iceMaterial;
+            playerCollider.sharedMaterial = playerMaterial;
         }
     }
 
