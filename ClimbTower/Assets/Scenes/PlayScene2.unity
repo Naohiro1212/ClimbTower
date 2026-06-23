@@ -3849,7 +3849,6 @@ MonoBehaviour:
   airControlMultiplier: 0.67
   groundAcceleration: 30
   groundDeceleration: 40
-  iceAcceleration: 8
   iceDeceleration: 2
   jumpForce: 9.1
   groundCheck: {fileID: 1985258914}
@@ -6830,7 +6829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoyaControll
   moyaSpd: 0.95
-  posMaxY: 80
+  posMaxY: 85
   gameNormalTimer: {fileID: 1120777271}
 --- !u!61 &1438859657
 BoxCollider2D:

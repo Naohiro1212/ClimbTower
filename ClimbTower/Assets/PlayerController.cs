@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundDeceleration = 40f;
 
     [Header("Ice Move")]
-    [SerializeField] private float iceAcceleration = 30f;
     [SerializeField] private float iceDeceleration = 30.0f;
 
     [Header("Jump")]
@@ -218,15 +217,14 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(
+        Collider2D hit = Physics2D.OverlapCircle(
             groundCheck.position,
-            Vector2.down,
             groundCheckDistance,
             groundLayer
         );
 
-        isGrounded = hit.collider != null;
-        currentGroundCollider = hit.collider;
+        isGrounded = hit != null;
+        currentGroundCollider = hit;
     }
 
     private bool IsOnIce()
