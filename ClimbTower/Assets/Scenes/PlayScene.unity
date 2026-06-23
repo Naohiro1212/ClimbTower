@@ -8428,7 +8428,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 01f33b1b3473d404ea9e5a8bdb50fc90, type: 3}
   goalSound: {fileID: 8300000, guid: 2126a3c5d19abc844890383c54ce4d87, type: 3}
   moyaSound: {fileID: 8300000, guid: 4bfc16a1db928f444851b8509a1a31a9, type: 3}
-  bgmSource: {fileID: 0}
+  bgmSource: {fileID: 1461429122}
   canMove: 0
   isGrounded: 0
 --- !u!4 &1877265483
